@@ -1,7 +1,7 @@
 {
   "name": "University of the People Student Hub",
-  "short_name": "UoPeople",
-  "description": "Official Student Portal and Tool Hub",
+  "short_name": "UoPeople Hub",
+  "description": "Official Student Portal and Tool Hub for University of the People",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

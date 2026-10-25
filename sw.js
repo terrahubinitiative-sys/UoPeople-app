@@ -1,4 +1,4 @@
-const CACHE_NAME = 'uopeople-pwa-v6';
+const CACHE_NAME = 'uopeople-pwa-v5';
 const ASSETS_TO_CACHE = [
     './index.html',
     './manifest.json',
