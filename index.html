@@ -1,364 +1,510 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>University of the People - Student Hub</title>
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#0f172a">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University of the People - Student Hub PWA</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f172a">
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --bg-item: #0f172a;
+            --accent-gold: #f59e0b;
+            --accent-blue: #38bdf8;
+            --accent-green: #34d399;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            margin: 0;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .app-container {
+            max-width: 480px;
+            width: 100%;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 8px 0;
+        }
+        .header-title h1 {
+            font-size: 18px;
+            margin: 0;
+            color: var(--text-main);
+        }
+        .header-title span {
+            font-size: 11px;
+            color: var(--accent-gold);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .logo-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        .menu-btn {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border: 1px solid var(--border-color);
+        }
+        .official-tag {
+            font-size: 10px;
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-gold);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .portal-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .portal-header img {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .portal-header h2 {
+            font-size: 18px;
+            margin: 0;
+        }
+        .portal-header p {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin: 2px 0 0 0;
+        }
+        .btn-portal {
+            display: block;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+        .btn-secondary {
+            display: block;
+            background: #0f172a;
+            color: var(--text-main);
+            text-align: center;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 14px;
+            border: 1px solid var(--border-color);
+            font-weight: 500;
+        }
+        .gpa-card {
+            cursor: pointer;
+        }
+        .gpa-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .gpa-score {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--accent-green);
+        }
+        .gpa-content {
+            display: none;
+            margin-top: 16px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 14px;
+        }
+        .gpa-content.open { display: block; }
+        .gpa-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .btn-add {
+            background: #065f46;
+            color: #34d399;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .course-item {
+            background: var(--bg-item);
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            border: 1px solid var(--border-color);
+        }
+        .course-item select {
+            background: #1e293b;
+            color: white;
+            border: 1px solid var(--border-color);
+            padding: 4px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 4px;
+        }
+        .ai-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+        .btn-ai {
+            display: block;
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .team-section {
+            text-align: center;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .team-member {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        .team-member img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-gold);
+            margin-bottom: 8px;
+        }
+        .team-member h4 { margin: 0; font-size: 13px; }
+        .team-member p { margin: 2px 0 0 0; font-size: 10px; color: var(--text-muted); }
+        
+        /* Drawer styles - Asili kabisa bila ziada */
+        .drawer {
+            position: fixed;
+            top: 0; right: -100%;
+            width: 280px; height: 100vh;
+            background: var(--bg-card);
+            box-shadow: -5px 0 25px rgba(0,0,0,0.5);
+            transition: 0.3s ease;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-left: 1px solid var(--border-color);
+        }
+        .drawer.open { right: 0; }
+        .drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .close-btn { background: none; border: none; color: var(--text-main); font-size: 22px; cursor: pointer; }
+        .btn-install {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white; border: none; padding: 12px; width: 100%; border-radius: 8px;
+            font-weight: bold; cursor: pointer; display: none; margin-top: 15px;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+    </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between font-sans antialiased selection:bg-amber-500 selection:text-slate-950">
+<body>
 
-  <!-- TOP NAVBAR -->
-  <header class="sticky top-0 z-30 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 py-3 flex items-center justify-between shadow-lg">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center overflow-hidden p-0.5 border border-slate-700 shadow-sm">
-        <img src="icons/logo.jpeg" alt="UoPeople Logo" class="w-full h-full object-contain rounded-lg">
-      </div>
-      <div>
-        <h1 class="text-base font-bold text-white tracking-tight leading-none">University of the People</h1>
-        <span class="text-[10px] text-amber-400 font-medium tracking-wider uppercase">Student Hub PWA</span>
-      </div>
-    </div>
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <img src="icons/icon-192.png" alt="Logo" class="logo-badge">
+                <div class="header-title">
+                    <h1>University of the People</h1>
+                    <span>STUDENT HUB PWA</span>
+                </div>
+            </div>
+            <button class="menu-btn" onclick="toggleDrawer()">☰</button>
+        </header>
 
-    <button id="menuBtn" class="p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 transition active:scale-95 focus:outline-none">
-      <i class="fa-solid fa-bars text-xl"></i>
-    </button>
-  </header>
-
-  <!-- SIDEBAR NAVIGATION DRAWER -->
-  <div id="drawerOverlay" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-40 hidden transition-opacity opacity-0"></div>
-  <aside id="navDrawer" class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-slate-900 border-l border-slate-800 z-50 p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl">
-    <div>
-      <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
-        <div class="flex items-center gap-2">
-          <i class="fa-solid fa-compass text-amber-400 text-lg"></i>
-          <h2 class="font-bold text-slate-200">Quick Navigation</h2>
+        <!-- Portal Access Card -->
+        <div class="card">
+            <span class="official-tag">OFFICIAL ACCESS</span>
+            <div class="portal-header">
+                <img src="icons/logo.jpeg" alt="Portal Logo">
+                <div>
+                    <h2>UoPeople Portal</h2>
+                    <p>Manage courses, payments & grades</p>
+                </div>
+            </div>
+            <a href="https://portal.uopeople.edu/login?referral=https://payment-bluesnap.uopeople.edu/Account/cantLoginToMyAccount" target="_blank" class="btn-portal">Open Student Portal</a>
+            <a href="https://learn.uopeople.edu/d2l/login?sessionExpired=0&target=%2fd2l%2fhome" target="_blank" class="btn-secondary">Go to Brightspace Classroom</a>
         </div>
-        <button id="closeBtn" class="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-      </div>
 
-      <nav class="space-y-3">
-        <a href="https://portal.uopeople.edu/?referral=https://payment-bluesnap.uopeople.edu/Account/cantLoginToMyAccount" 
-           target="_blank" 
-           class="flex items-center justify-between p-3.5 bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 rounded-xl text-slate-200 hover:text-amber-400 transition group">
-          <div class="flex items-center gap-3">
-            <i class="fa-solid fa-user-graduate text-amber-400"></i>
-            <span class="text-sm font-semibold">Student Portal</span>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-amber-400 transition"></i>
-        </a>
+        <!-- GPA Tracker Card -->
+        <div class="card gpa-card">
+            <div class="gpa-header" onclick="toggleGpaList()">
+                <div>
+                    <span style="font-size: 13px; color: var(--text-muted);">GPA & Grade Tracker</span>
+                    <h3 style="margin: 4px 0 0 0; font-size: 15px;">Tap to view / edit full course list</h3>
+                </div>
+                <div class="gpa-score" id="gpaScoreDisplay">3.90</div>
+            </div>
+            <div class="gpa-content" id="gpaContent">
+                <div class="gpa-toolbar">
+                    <span style="font-size: 12px; color: var(--text-muted);">Your Enrolled Courses</span>
+                    <button class="btn-add" onclick="addCourse()">+ Add Course</button>
+                </div>
+                <div id="courseListContainer"></div>
+                <div style="font-size: 10px; color: var(--text-muted); text-align: center; margin-top: 10px;">Changes are automatically saved locally.</div>
+            </div>
+        </div>
 
-        <a href="https://learn.uopeople.edu/d2l/home" 
-           target="_blank" 
-           class="flex items-center justify-between p-3.5 bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 rounded-xl text-slate-200 hover:text-sky-400 transition group">
-          <div class="flex items-center gap-3">
-            <i class="fa-solid fa-book-open text-sky-400"></i>
-            <span class="text-sm font-semibold">Brightspace LMS</span>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-sky-400 transition"></i>
-        </a>
+        <!-- Ezrelyn Proctor AI Card -->
+        <div class="card ai-card">
+            <span class="official-tag" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">EXAM ASSISTANT</span>
+            <img src="icons/sarah.jpg" alt="Ezrelyn Proctor AI">
+            <h3 style="margin: 0 0 6px 0; font-size: 16px;">Ezrelyn Proctor AI</h3>
+            <p style="margin: 0 0 14px 0; font-size: 12px; color: var(--text-muted);">Prep & practice for final exams with smart AI feedback.</p>
+            <a href="#" onclick="alert('Launching Ezrelyn Proctor AI...'); return false;" class="btn-ai">Launch Ezrelyn Proctor AI</a>
+        </div>
 
-        <a href="https://ezrelyn-ai-proctor-system.onrender.com/" 
-           target="_blank" 
-           class="flex items-center justify-between p-3.5 bg-indigo-950/40 hover:bg-indigo-900/40 border border-indigo-700/50 rounded-xl text-indigo-200 hover:text-indigo-300 transition group">
-          <div class="flex items-center gap-3">
-            <i class="fa-solid fa-robot text-indigo-400"></i>
-            <span class="text-sm font-semibold">Ezrelyn Proctor AI</span>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square text-xs text-indigo-400/60 group-hover:text-indigo-300 transition"></i>
-        </a>
-      </nav>
+        <!-- TerraHub Initiative Card -->
+        <div class="card team-section">
+            <span class="official-tag" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-blue);">NAVAKHOLO TERRAHUB INITIATIVE</span>
+            <p style="font-size: 11px; color: var(--text-muted); margin: 6px 0 12px 0;">Created with passion by the student founders & tech leaders:</p>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="icons/ezra.jpg" alt="Ezra Wanyama">
+                    <h4>Ezra Wanyama</h4>
+                    <p>Co-Creator / Lead Dev</p>
+                </div>
+                <div class="team-member">
+                    <img src="icons/brian.jpg" alt="Brian">
+                    <h4>Brian</h4>
+                    <p>Co-Creator / Coordinator</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="pt-4 border-t border-slate-800">
-      <button id="drawerInstallBtn" class="w-full py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-md transition active:scale-95">
-        <i class="fa-solid fa-download"></i>
-        <span>Install App to Screen</span>
-      </button>
-    </div>
-  </aside>
-
-  <!-- MAIN CONTENT AREA -->
-  <main class="flex-1 max-w-md mx-auto w-full p-4 space-y-4 my-auto">
-
-    <!-- HERO PORTAL CARD -->
-    <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 border border-slate-800 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
-      <div class="absolute -top-10 -right-10 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
-
-      <div class="flex items-center gap-4 mb-5">
-        <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center overflow-hidden p-1 shadow-md border border-slate-700 shrink-0">
-          <img src="icons/logo.jpeg" alt="UoPeople Logo" class="w-full h-full object-contain">
+    <!-- Quick Navigation Drawer - Mzuri wa Asilimia 100 -->
+    <div id="navDrawer" class="drawer">
+        <div>
+            <div class="drawer-header">
+                <h3 style="margin: 0; color: var(--accent-gold);">Quick Navigation</h3>
+                <button class="close-btn" onclick="toggleDrawer()">✕</button>
+            </div>
+            <a href="https://portal.uopeople.edu/login" target="_blank" class="btn-secondary" style="margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
+                <span>Student Portal</span> <span>↗</span>
+            </a>
+            <a href="https://learn.uopeople.edu/d2l/home" target="_blank" class="btn-secondary" style="margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
+                <span>Brightspace LMS</span> <span>↗</span>
+            </a>
+            <a href="#" onclick="alert('Ezrelyn Proctor AI Assistant'); return false;" class="btn-secondary" style="display: flex; align-items: center; justify-content: space-between;">
+                <span>Ezrelyn Proctor AI</span> <span>↗</span>
+            </a>
         </div>
         <div>
-          <span class="text-[10px] font-bold text-amber-400 tracking-wider uppercase bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-md">Official Access</span>
-          <h2 class="text-xl font-extrabold text-white tracking-tight mt-1">UoPeople Portal</h2>
-          <p class="text-slate-400 text-xs">Manage courses, payments & grades</p>
+            <button id="installBtn" class="btn-install">Install App to Screen</button>
         </div>
-      </div>
-
-      <div class="space-y-2.5">
-        <a href="https://portal.uopeople.edu/?referral=https://payment-bluesnap.uopeople.edu/Account/cantLoginToMyAccount" 
-           target="_blank" 
-           class="block w-full py-3.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold rounded-xl text-center shadow-lg transition duration-200 active:scale-95 text-sm tracking-wide">
-           <i class="fa-solid fa-right-to-bracket mr-2"></i> Open Student Portal
-        </a>
-
-        <a href="https://learn.uopeople.edu/d2l/home" 
-           target="_blank" 
-           class="block w-full py-3 bg-slate-800 hover:bg-slate-700/80 text-slate-200 border border-slate-700 font-bold rounded-xl text-center transition duration-200 active:scale-95 text-xs">
-           <i class="fa-solid fa-graduation-cap mr-2 text-sky-400"></i> Go to Brightspace Classroom
-        </a>
-      </div>
     </div>
 
-    <!-- GPA & COURSE TRACKER CARD -->
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-xl">
-      <div class="flex items-center justify-between cursor-pointer" id="gpaHeaderToggle">
-        <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-            <i class="fa-solid fa-graduation-cap text-sm"></i>
-          </div>
-          <div>
-            <h3 class="text-sm font-bold text-white">GPA & Grade Tracker</h3>
-            <p class="text-[11px] text-slate-400">Tap to view / edit full course list</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-3">
-          <div class="text-right">
-            <span id="dashboardGpa" class="text-lg font-black text-emerald-400">0.00</span>
-            <span class="block text-[9px] text-slate-500 uppercase tracking-wider">Cum. GPA</span>
-          </div>
-          <i id="toggleIcon" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform"></i>
-        </div>
-      </div>
+    <script>
+        // Drawer toggle
+        function toggleDrawer() {
+            document.getElementById('navDrawer').classList.toggle('open');
+        }
 
-      <div id="gpaMenu" class="hidden mt-4 pt-4 border-t border-slate-800 space-y-3">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-semibold text-slate-300">Your Enrolled Courses</span>
-          <button id="addCourseBtn" class="px-2.5 py-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/30 rounded-lg text-xs font-medium transition">
-            <i class="fa-solid fa-plus mr-1"></i> Add Course
-          </button>
-        </div>
+        // GPA Tracker dropdown toggle
+        function toggleGpaList() {
+            document.getElementById('gpaContent').classList.toggle('open');
+        }
 
-        <div id="courseList" class="space-y-2 max-h-60 overflow-y-auto pr-1"></div>
-        <p class="text-[10px] text-slate-500 italic text-center">Changes are automatically saved locally.</p>
-      </div>
-    </div>
+        // Default Courses & Grade System
+        let courses = JSON.parse(localStorage.getItem('uopeople_courses')) || [
+            { name: "CS 1101 - Programming Fundamentals", grade: 4.0, label: "A (4.0)" },
+            { name: "ENG 10112 - English Composition", grade: 3.7, label: "A- (3.7)" },
+            { name: "UNIV 1001 - Online Education", grade: 4.0, label: "A (4.0)" }
+        ];
 
-    <!-- PROMOTIONAL CARD: EZRELYN PROCTOR AI -->
-    <div class="bg-gradient-to-r from-indigo-950/80 via-slate-900 to-slate-900 border border-indigo-800/50 rounded-3xl p-5 shadow-xl relative overflow-hidden">
-      <div class="flex items-center gap-4">
-        <div class="w-20 h-20 rounded-2xl overflow-hidden border-2 border-indigo-500/50 shadow-lg shrink-0 bg-indigo-900">
-          <img src="icons/sarah.jpg" alt="Ezrelyn Proctor AI" class="w-full h-full object-cover">
-        </div>
+        const gradeMap = {
+            "A (4.0)": 4.0, "A- (3.7)": 3.7, "B+ (3.3)": 3.3,
+            "B (3.0)": 3.0, "B- (2.7)": 2.7, "C+ (2.3)": 2.3,
+            "C (2.0)": 2.0, "D (1.0)": 1.0, "F (0.0)": 0.0
+        };
 
-        <div class="flex-1">
-          <div class="flex items-center gap-1.5 mb-1">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span class="text-[10px] font-bold text-indigo-300 tracking-wider uppercase">Exam Assistant</span>
-          </div>
-          <h3 class="text-base font-bold text-white leading-snug">Ezrelyn Proctor AI</h3>
-          <p class="text-slate-400 text-xs mt-0.5 leading-relaxed">Prep & practice for final exams with smart AI feedback.</p>
-        </div>
-      </div>
+        function renderCourses() {
+            const container = document.getElementById('courseListContainer');
+            container.innerHTML = '';
+            let totalGrade = 0;
+            courses.forEach((c, index) => {
+                totalGrade += c.grade;
+                let html = `
+                    <div class="course-item">
+                        <span style="max-width: 170px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${c.name}</span>
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <select onchange="updateGrade(${index}, this.value)">
+                `;
+                for (let key in gradeMap) {
+                    let selected = (gradeMap[key] === c.grade) ? 'selected' : '';
+                    html += `<option value="${key}" ${selected}>${key}</option>`;
+                }
+                html += `
+                            </select>
+                            <button class="delete-btn" onclick="deleteCourse(${index})">🗑️</button>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
 
-      <a href="https://ezrelyn-ai-proctor-system.onrender.com/" 
-         target="_blank" 
-         class="mt-4 block w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-center shadow-lg transition duration-200 active:scale-95 text-xs tracking-wide">
-         <i class="fa-solid fa-brain mr-1.5"></i> Launch Ezrelyn Proctor AI
-      </a>
-    </div>
+            let gpa = courses.length > 0 ? (totalGrade / courses.length).toFixed(2) : "0.00";
+            document.getElementById('gpaScoreDisplay').innerText = gpa;
+            localStorage.setItem('uopeople_courses', JSON.stringify(courses));
+        }
 
-    <!-- CREATORS CARD: NAVAKHOLO TERRAHUB INITIATIVE -->
-    <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-5 shadow-xl text-center relative overflow-hidden">
-      <div class="flex items-center justify-center gap-2 mb-3">
-        <div class="w-7 h-7 rounded-lg overflow-hidden border border-slate-700 bg-slate-800">
-          <img src="icons/nti_logo.jpg" alt="TerraHub Logo" class="w-full h-full object-cover">
-        </div>
-        <span class="text-xs font-bold text-amber-400 tracking-wide uppercase">Navakholo TerraHub Initiative</span>
-      </div>
+        function updateGrade(index, val) {
+            courses[index].grade = gradeMap[val];
+            courses[index].label = val;
+            renderCourses();
+        }
 
-      <p class="text-[11px] text-slate-400 mb-4">Created with passion by the student founders & tech leaders:</p>
+        function deleteCourse(index) {
+            courses.splice(index, 1);
+            renderCourses();
+        }
 
-      <!-- Creators Photos Grid -->
-      <div class="grid grid-cols-2 gap-3 mb-3">
-        <div class="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-3 flex flex-col items-center">
-          <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-amber-500/80 shadow-md mb-2">
-            <img src="icons/ezra.jpg" alt="Ezra Wanyama" class="w-full h-full object-cover">
-          </div>
-          <h4 class="text-xs font-bold text-white">Ezra Wanyama</h4>
-          <span class="text-[10px] text-amber-400 font-medium">Co-Creator / Lead Dev</span>
-        </div>
+        function addCourse() {
+            let name = prompt("Enter Course Name (e.g., CS 1102 - Datastructures):");
+            if (name) {
+                courses.push({ name: name, grade: 4.0, label: "A (4.0)" });
+                renderCourses();
+            }
+        }
 
-        <div class="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-3 flex flex-col items-center">
-          <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-amber-500/80 shadow-md mb-2">
-            <img src="icons/brian.jpg" alt="Brian" class="w-full h-full object-cover">
-          </div>
-          <h4 class="text-xs font-bold text-white">Brian</h4>
-          <span class="text-[10px] text-amber-400 font-medium">Co-Creator / Coordinator</span>
-        </div>
-      </div>
-    </div>
+        renderCourses();
 
-    <!-- INSTALL PWA BUTTON -->
-    <button id="mainInstallBtn" 
-            class="w-full py-3 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 font-semibold rounded-2xl text-xs flex items-center justify-center gap-2 shadow transition active:scale-95">
-      <i class="fa-solid fa-mobile-screen-button text-amber-400"></i>
-      <span>Add App Shortcut to Phone Screen</span>
-    </button>
+        // Background Check for Sun, Mon, Wed Deadlines (Silent Notification Trigger)
+        function checkDeadlineReminders() {
+            if (!("Notification" in window)) return;
+            
+            if (Notification.permission === "default") {
+                Notification.requestPermission();
+            }
 
-  </main>
+            const today = new Date().getDay(); // 0: Sun, 1: Mon, 3: Wed
+            let title = "", body = "";
 
-  <!-- FOOTER BRANDING -->
-  <footer class="py-4 text-center border-t border-slate-900 bg-slate-950">
-    <p class="text-xs text-slate-500 font-medium">
-      Powered by <span class="text-slate-300 font-bold">Ezrex Ltd</span>
-    </p>
-  </footer>
+            if (today === 0) {
+                title = "📌 Discussion Forums Due Today";
+                body = "UoPeople Sunday Reminder: Post your initial responses and reply to peers.";
+            } else if (today === 1) {
+                title = "📝 Graded Quizzes Due Today";
+                body = "UoPeople Monday Reminder: Complete and submit your quizzes on time.";
+            } else if (today === 3) {
+                title = "📚 Unit / Written Assignments Due";
+                body = "UoPeople Wednesday Reminder: Learning journals and written assignments deadline.";
+            }
 
-  <!-- SCRIPT LOGIC -->
-  <script>
-    const menuBtn = document.getElementById('menuBtn');
-    const closeBtn = document.getElementById('closeBtn');
-    const navDrawer = document.getElementById('navDrawer');
-    const drawerOverlay = document.getElementById('drawerOverlay');
+            if (title && Notification.permission === "granted") {
+                if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+                    navigator.serviceWorker.ready.then(reg => {
+                        reg.showNotification(title, {
+                            body: body,
+                            icon: "icons/icon-192.png",
+                            badge: "icons/icon-192.png"
+                        });
+                    });
+                }
+            }
+        }
 
-    function openDrawer() {
-      drawerOverlay.classList.remove('hidden');
-      setTimeout(() => {
-        drawerOverlay.classList.remove('opacity-0');
-        navDrawer.classList.remove('translate-x-full');
-      }, 10);
-    }
-
-    function closeDrawer() {
-      navDrawer.classList.add('translate-x-full');
-      drawerOverlay.classList.add('opacity-0');
-      setTimeout(() => {
-        drawerOverlay.classList.add('hidden');
-      }, 300);
-    }
-
-    menuBtn.addEventListener('click', openDrawer);
-    closeBtn.addEventListener('click', closeDrawer);
-    drawerOverlay.addEventListener('click', closeDrawer);
-
-    // GPA & Course Manager Logic
-    const gpaHeaderToggle = document.getElementById('gpaHeaderToggle');
-    const gpaMenu = document.getElementById('gpaMenu');
-    const toggleIcon = document.getElementById('toggleIcon');
-    const dashboardGpa = document.getElementById('dashboardGpa');
-    const courseList = document.getElementById('courseList');
-    const addCourseBtn = document.getElementById('addCourseBtn');
-
-    gpaHeaderToggle.addEventListener('click', () => {
-      gpaMenu.classList.toggle('hidden');
-      toggleIcon.classList.toggle('rotate-180');
-    });
-
-    let courses = JSON.parse(localStorage.getItem('uopeople_courses')) || [
-      { name: 'CS 1101 - Programming Fundamentals', grade: '4.0' },
-      { name: 'ENG 10112 - English Composition', grade: '3.7' },
-      { name: 'UNIV 1001 - Online Education', grade: '4.0' }
-    ];
-
-    const gradeValues = {
-      '4.0': 4.0, '3.7': 3.7, '3.3': 3.3, '3.0': 3.0,
-      '2.7': 2.7, '2.0': 2.0, '1.0': 1.0, '0.0': 0.0
-    };
-
-    function renderCourses() {
-      courseList.innerHTML = '';
-      let total = 0;
-
-      courses.forEach((course, index) => {
-        total += gradeValues[course.grade] || 0;
-        
-        const div = document.createElement('div');
-        div.className = 'flex items-center gap-2 bg-slate-800/80 p-2.5 rounded-xl border border-slate-700/60';
-        div.innerHTML = `
-          <input type="text" value="${course.name}" data-index="${index}" class="course-name-input flex-1 bg-slate-900 text-slate-200 text-xs py-1.5 px-2.5 rounded-lg border border-slate-700 focus:outline-none focus:border-amber-500" placeholder="Course Name">
-          <select data-index="${index}" class="course-grade-select bg-slate-900 text-slate-200 text-xs py-1.5 px-2 rounded-lg border border-slate-700 focus:outline-none focus:border-amber-500">
-            <option value="4.0" ${course.grade === '4.0' ? 'selected' : ''}>A (4.0)</option>
-            <option value="3.7" ${course.grade === '3.7' ? 'selected' : ''}>A- (3.7)</option>
-            <option value="3.3" ${course.grade === '3.3' ? 'selected' : ''}>B+ (3.3)</option>
-            <option value="3.0" ${course.grade === '3.0' ? 'selected' : ''}>B (3.0)</option>
-            <option value="2.7" ${course.grade === '2.7' ? 'selected' : ''}>B- (2.7)</option>
-            <option value="2.0" ${course.grade === '2.0' ? 'selected' : ''}>C (2.0)</option>
-            <option value="1.0" ${course.grade === '1.0' ? 'selected' : ''}>D (1.0)</option>
-            <option value="0.0" ${course.grade === '0.0' ? 'selected' : ''}>F (0.0)</option>
-          </select>
-          <button onclick="removeCourse(${index})" class="text-slate-500 hover:text-red-400 p-1.5 transition">
-            <i class="fa-solid fa-trash text-xs"></i>
-          </button>
-        `;
-        courseList.appendChild(div);
-      });
-
-      const gpa = courses.length > 0 ? (total / courses.length).toFixed(2) : '0.00';
-      dashboardGpa.textContent = gpa;
-      localStorage.setItem('uopeople_courses', JSON.stringify(courses));
-
-      document.querySelectorAll('.course-name-input').forEach(input => {
-        input.addEventListener('input', (e) => {
-          courses[e.target.dataset.index].name = e.target.value;
-          localStorage.setItem('uopeople_courses', JSON.stringify(courses));
+        window.addEventListener('load', () => {
+            setTimeout(checkDeadlineReminders, 4000);
         });
-      });
 
-      document.querySelectorAll('.course-grade-select').forEach(select => {
-        select.addEventListener('change', (e) => {
-          courses[e.target.dataset.index].grade = e.target.value;
-          renderCourses();
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker registered successfully!', reg))
+                    .catch(err => console.log('SW registration failed:', err));
+            });
+        }
+
+        // PWA Install Prompt Handler
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.style.display = 'block';
         });
-      });
-    }
 
-    window.removeCourse = function(index) {
-      courses.splice(index, 1);
-      renderCourses();
-    }
-
-    addCourseBtn.addEventListener('click', () => {
-      courses.push({ name: `Course ${courses.length + 1}`, grade: '4.0' });
-      renderCourses();
-    });
-
-    renderCourses();
-
-    let deferredPrompt;
-    const mainInstallBtn = document.getElementById('mainInstallBtn');
-    const drawerInstallBtn = document.getElementById('drawerInstallBtn');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-    });
-
-    async function handleInstall() {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        deferredPrompt = null;
-      } else {
-        alert('To install this app on your phone:\n1. Tap your browser menu (3 dots)\n2. Tap "Add to Home Screen" or "Install App"');
-      }
-    }
-
-    mainInstallBtn.addEventListener('click', handleInstall);
-    drawerInstallBtn.addEventListener('click', handleInstall);
-
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').catch(err => console.log('SW error:', err));
-      });
-    }
-  </script>
-
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    console.log('User accepted install prompt');
+                }
+                deferredPrompt = null;
+                installBtn.style.display = 'none';
+                toggleDrawer();
+            }
+        });
+    </script>
 </body>
 </html>
