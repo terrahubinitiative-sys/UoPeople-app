@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>University of the People - Student Hub PWA</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#0b0f19">
     <style>
         :root {
-            --bg-primary: #0f172a;
-            --bg-card: #1e293b;
-            --bg-item: #0f172a;
+            --bg-primary: #0b0f19;
+            --bg-card: #131b2e;
+            --bg-item: #0b0f19;
             --accent-gold: #f59e0b;
             --accent-blue: #38bdf8;
             --accent-green: #34d399;
@@ -28,244 +28,69 @@
             flex-direction: column;
             align-items: center;
         }
-        .app-container {
-            max-width: 480px;
-            width: 100%;
-        }
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            padding: 8px 0;
-        }
-        .header-title h1 {
-            font-size: 18px;
-            margin: 0;
-            color: var(--text-main);
-        }
-        .header-title span {
-            font-size: 11px;
-            color: var(--accent-gold);
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        .logo-badge {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            object-fit: cover;
-        }
-        .menu-btn {
-            background: none;
-            border: none;
-            color: var(--text-main);
-            font-size: 24px;
-            cursor: pointer;
-        }
-        .card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 16px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            border: 1px solid var(--border-color);
-        }
-        .official-tag {
-            font-size: 10px;
-            background: rgba(245, 158, 11, 0.15);
-            color: var(--accent-gold);
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 8px;
-        }
-        .portal-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-        .portal-header img {
-            width: 48px;
-            height: 48px;
-            border-radius: 10px;
-            object-fit: cover;
-        }
-        .portal-header h2 {
-            font-size: 18px;
-            margin: 0;
-        }
-        .portal-header p {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin: 2px 0 0 0;
-        }
-        .btn-portal {
-            display: block;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-            text-align: center;
-            padding: 12px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-        }
-        .btn-secondary {
-            display: block;
-            background: #0f172a;
-            color: var(--text-main);
-            text-align: center;
-            padding: 12px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-size: 14px;
-            border: 1px solid var(--border-color);
-            font-weight: 500;
-        }
-        .gpa-card {
-            cursor: pointer;
-        }
-        .gpa-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .gpa-score {
-            font-size: 22px;
-            font-weight: bold;
-            color: var(--accent-green);
-        }
-        .gpa-content {
-            display: none;
-            margin-top: 16px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 14px;
-        }
+        .app-container { max-width: 480px; width: 100%; }
+        header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; padding: 8px 0; }
+        .header-title h1 { font-size: 18px; margin: 0; color: var(--text-main); }
+        .header-title span { font-size: 11px; color: var(--accent-gold); font-weight: bold; letter-spacing: 1px; }
+        .logo-badge { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; }
+        .menu-btn { background: none; border: none; color: var(--text-main); font-size: 24px; cursor: pointer; }
+        .card { background: var(--bg-card); border-radius: 20px; padding: 22px; margin-bottom: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); border: 1px solid var(--border-color); }
+        .official-tag { font-size: 10px; background: rgba(245, 158, 11, 0.15); color: var(--accent-gold); padding: 3px 8px; border-radius: 4px; font-weight: bold; display: inline-block; margin-bottom: 10px; }
+        .portal-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .portal-header img { width: 48px; height: 48px; border-radius: 12px; object-fit: cover; }
+        .portal-header h2 { font-size: 18px; margin: 0; }
+        .portal-header p { font-size: 12px; color: var(--text-muted); margin: 2px 0 0 0; }
+        .btn-portal { display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; text-align: center; padding: 14px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 14px; margin-bottom: 10px; box-shadow: 0 6px 16px rgba(245, 158, 11, 0.35); }
+        .btn-secondary { display: flex; align-items: center; justify-content: center; gap: 8px; background: #0b0f19; color: var(--text-main); text-align: center; padding: 14px; border-radius: 12px; text-decoration: none; font-size: 14px; border: 1px solid var(--border-color); font-weight: 500; }
+        .gpa-card { cursor: pointer; }
+        .gpa-header { display: flex; justify-content: space-between; align-items: center; }
+        .gpa-score-box { text-align: right; }
+        .gpa-score { font-size: 22px; font-weight: bold; color: var(--accent-green); }
+        .gpa-sub { font-size: 9px; color: var(--text-muted); letter-spacing: 0.5px; }
+        .gpa-content { display: none; margin-top: 16px; border-top: 1px solid var(--border-color); padding-top: 14px; }
         .gpa-content.open { display: block; }
-        .gpa-toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-        .btn-add {
-            background: #065f46;
-            color: #34d399;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .course-item {
-            background: var(--bg-item);
-            padding: 10px 12px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            border: 1px solid var(--border-color);
-        }
-        .course-item select {
-            background: #1e293b;
-            color: white;
-            border: 1px solid var(--border-color);
-            padding: 4px 6px;
-            border-radius: 4px;
-            font-size: 12px;
-        }
-        .delete-btn {
-            background: none;
-            border: none;
-            color: #ef4444;
-            cursor: pointer;
-            font-size: 14px;
-            padding: 4px;
-        }
-        .ai-card img {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 12px;
-        }
-        .btn-ai {
-            display: block;
-            background: linear-gradient(135deg, #6366f1, #4f46e5);
-            color: white;
-            text-align: center;
-            padding: 12px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-        }
-        .team-section {
-            text-align: center;
-        }
-        .team-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 12px;
-        }
-        .team-member {
-            background: rgba(15, 23, 42, 0.6);
-            padding: 12px;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid var(--border-color);
-        }
-        .team-member img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--accent-gold);
-            margin-bottom: 8px;
-        }
+        .gpa-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .btn-add { background: #065f46; color: #34d399; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; }
+        .course-item { background: var(--bg-item); padding: 10px 12px; border-radius: 8px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; border: 1px solid var(--border-color); }
+        .course-item input.grade-input { background: #131b2e; color: var(--accent-green); font-weight: bold; border: 1px solid var(--border-color); padding: 6px 8px; border-radius: 6px; font-size: 13px; width: 55px; text-align: center; outline: none; }
+        .delete-btn { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 14px; padding: 4px; }
+        .ai-card-body { display: flex; gap: 12px; align-items: center; margin-bottom: 14px; }
+        .ai-card-body img { width: 64px; height: 64px; border-radius: 14px; object-fit: cover; border: 1px solid var(--border-color); }
+        .btn-ai { display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; text-align: center; padding: 14px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 14px; cursor: pointer; border: none; width: 100%; box-sizing: border-box; box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35); }
+        .team-section { text-align: center; }
+        .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+        .team-member { background: rgba(11, 15, 25, 0.7); padding: 14px; border-radius: 14px; text-align: center; border: 1px solid var(--border-color); }
+        .team-member img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-gold); margin-bottom: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
         .team-member h4 { margin: 0; font-size: 13px; }
         .team-member p { margin: 2px 0 0 0; font-size: 10px; color: var(--text-muted); }
-        
-        /* Drawer styles - Asili kabisa bila ziada */
-        .drawer {
-            position: fixed;
-            top: 0; right: -100%;
-            width: 280px; height: 100vh;
-            background: var(--bg-card);
-            box-shadow: -5px 0 25px rgba(0,0,0,0.5);
-            transition: 0.3s ease;
-            z-index: 1000;
-            padding: 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border-left: 1px solid var(--border-color);
-        }
+        .drawer { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: var(--bg-card); box-shadow: -5px 0 25px rgba(0,0,0,0.5); transition: 0.3s ease; z-index: 1000; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; border-left: 1px solid var(--border-color); overflow-y: auto; }
         .drawer.open { right: 0; }
-        .drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .close-btn { background: none; border: none; color: var(--text-main); font-size: 22px; cursor: pointer; }
-        .btn-install {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white; border: none; padding: 12px; width: 100%; border-radius: 8px;
-            font-weight: bold; cursor: pointer; display: none; margin-top: 15px;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-        }
+        .drawer-links { display: flex; flex-direction: column; gap: 10px; }
+        .drawer-footer-section { margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 15px; }
+        .btn-notif, .btn-custom-notif { color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; text-align: center; box-sizing: border-box; box-shadow: 0 4px 12px rgba(0,0,0,0.2); font-size: 14px; }
+        .btn-notif { background: linear-gradient(135deg, #059669, #047857); }
+        .btn-notif.disabled { background: linear-gradient(135deg, #7f1d1d, #991b1b); }
+        .btn-custom-notif { background: linear-gradient(135deg, #6366f1, #4f46e5); margin-top: 8px; }
+        .btn-install { background: linear-gradient(135deg, #f59e0b, #d97706); display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 16px; box-shadow: 0 6px 16px rgba(245, 158, 11, 0.35); color: white; border: none; padding: 14px; width: 100%; border-radius: 12px; font-weight: bold; cursor: pointer; text-align: center; box-sizing: border-box; font-size: 14px; }
+        .custom-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 15, 25, 0.85); backdrop-filter: blur(6px); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+        .custom-modal { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 18px; padding: 24px; width: 100%; max-width: 360px; box-shadow: 0 12px 30px rgba(0,0,0,0.4); text-align: left; max-height: 85vh; overflow-y: auto; }
+        .custom-modal h3 { margin: 0 0 10px 0; font-size: 16px; color: var(--accent-gold); }
+        .custom-modal p { margin: 0 0 12px 0; font-size: 13px; color: var(--text-muted); }
+        .custom-modal input, .custom-modal select { width: 100%; background: var(--bg-primary); border: 1px solid var(--border-color); color: white; padding: 10px 12px; border-radius: 8px; font-size: 13px; box-sizing: border-box; margin-bottom: 12px; outline: none; }
+        .custom-modal-btns { display: flex; gap: 10px; justify-content: flex-end; margin-top: 6px; }
+        .custom-modal-btn { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; border: none; }
+        .btn-cancel { background: #334155; color: white; }
+        .btn-confirm { background: var(--accent-green); color: #065f46; }
+        .reminder-list-item { background: var(--bg-primary); padding: 10px; border-radius: 8px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border-color); font-size: 12px; }
+        #wakeModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 15, 25, 0.92); backdrop-filter: blur(8px); z-index: 9999; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; box-sizing: border-box; }
+        .spinner { width: 64px; height: 64px; border: 4px solid rgba(99, 102, 241, 0.2); border-top: 4px solid #6366f1; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
-
     <div class="app-container">
-        <!-- Header -->
         <header>
             <div style="display: flex; align-items: center; gap: 12px;">
                 <img src="icons/icon-192.png" alt="Logo" class="logo-badge">
@@ -276,8 +101,6 @@
             </div>
             <button class="menu-btn" onclick="toggleDrawer()">☰</button>
         </header>
-
-        <!-- Portal Access Card -->
         <div class="card">
             <span class="official-tag">OFFICIAL ACCESS</span>
             <div class="portal-header">
@@ -287,42 +110,60 @@
                     <p>Manage courses, payments & grades</p>
                 </div>
             </div>
-            <a href="https://portal.uopeople.edu/login?referral=https://payment-bluesnap.uopeople.edu/Account/cantLoginToMyAccount" target="_blank" class="btn-portal">Open Student Portal</a>
-            <a href="https://learn.uopeople.edu/d2l/login?sessionExpired=0&target=%2fd2l%2fhome" target="_blank" class="btn-secondary">Go to Brightspace Classroom</a>
+            <a href="https://portal.uopeople.edu/login?referral=https://payment-bluesnap.uopeople.edu/Account/cantLoginToMyAccount" target="_blank" class="btn-portal">
+                <span>🚪</span> Open Student Portal
+            </a>
+            <a href="https://learn.uopeople.edu/d2l/login?sessionExpired=0&target=%2fd2l%2fhome" target="_blank" class="btn-secondary">
+                <span>🎓</span> Go to Brightspace Classroom
+            </a>
         </div>
 
-        <!-- GPA Tracker Card -->
         <div class="card gpa-card">
             <div class="gpa-header" onclick="toggleGpaList()">
-                <div>
-                    <span style="font-size: 13px; color: var(--text-muted);">GPA & Grade Tracker</span>
-                    <h3 style="margin: 4px 0 0 0; font-size: 15px;">Tap to view / edit full course list</h3>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 20px; background: rgba(52, 211, 153, 0.15); padding: 8px; border-radius: 10px;">📊</span>
+                    <div>
+                        <span style="font-size: 13px; color: var(--text-muted);">GPA & Grade Tracker</span>
+                        <h3 style="margin: 2px 0 0 0; font-size: 13px; font-weight: normal; color: var(--text-main);">Tap to view / edit full course list</h3>
+                    </div>
                 </div>
-                <div class="gpa-score" id="gpaScoreDisplay">3.90</div>
+                <div class="gpa-score-box">
+                    <div class="gpa-score"><span id="gpaScoreDisplay">3.90</span> <span style="font-size: 14px;">∨</span></div>
+                    <div class="gpa-sub">CUM. GPA</div>
+                </div>
             </div>
             <div class="gpa-content" id="gpaContent">
                 <div class="gpa-toolbar">
                     <span style="font-size: 12px; color: var(--text-muted);">Your Enrolled Courses</span>
-                    <button class="btn-add" onclick="addCourse()">+ Add Course</button>
+                    <button class="btn-add" onclick="openAddCourseModal()">+ Add Course</button>
                 </div>
                 <div id="courseListContainer"></div>
                 <div style="font-size: 10px; color: var(--text-muted); text-align: center; margin-top: 10px;">Changes are automatically saved locally.</div>
             </div>
         </div>
-
-        <!-- Ezrelyn Proctor AI Card -->
-        <div class="card ai-card">
-            <span class="official-tag" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">EXAM ASSISTANT</span>
-            <img src="icons/sarah.jpg" alt="Ezrelyn Proctor AI">
-            <h3 style="margin: 0 0 6px 0; font-size: 16px;">Ezrelyn Proctor AI</h3>
-            <p style="margin: 0 0 14px 0; font-size: 12px; color: var(--text-muted);">Prep & practice for final exams with smart AI feedback.</p>
-            <a href="#" onclick="alert('Launching Ezrelyn Proctor AI...'); return false;" class="btn-ai">Launch Ezrelyn Proctor AI</a>
+        <div class="card">
+            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 10px;">
+                <span style="width: 8px; height: 8px; background: #34d399; border-radius: 50%; display: inline-block;"></span>
+                <span style="font-size: 10px; color: #34d399; font-weight: bold; letter-spacing: 0.5px;">EXAM ASSISTANT</span>
+            </div>
+            <div class="ai-card-body">
+                <img src="icons/sarah.jpg" alt="Ezrelyn Proctor AI">
+                <div>
+                    <h3 style="margin: 0 0 4px 0; font-size: 16px;">Ezrelyn Proctor AI</h3>
+                    <p style="margin: 0; font-size: 12px; color: var(--text-muted);">Prep & practice for final exams with smart AI feedback.</p>
+                </div>
+            </div>
+            <button onclick="launchEzrelynWithMagic()" class="btn-ai">
+                <span>🧠</span> Launch Ezrelyn Proctor AI
+            </button>
         </div>
 
-        <!-- TerraHub Initiative Card -->
         <div class="card team-section">
-            <span class="official-tag" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-blue);">NAVAKHOLO TERRAHUB INITIATIVE</span>
-            <p style="font-size: 11px; color: var(--text-muted); margin: 6px 0 12px 0;">Created with passion by the student founders & tech leaders:</p>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 6px;">
+                <img src="icons/nti_logo.jpg" alt="NTI" style="width: 18px; height: 18px; border-radius: 4px; object-fit: cover;">
+                <span style="font-size: 10px; color: var(--accent-gold); font-weight: bold; letter-spacing: 1px;">NAVAKHOLO TERRAHUB INITIATIVE</span>
+            </div>
+            <p style="font-size: 11px; color: var(--text-muted); margin: 0 0 12px 0;">Created with passion by the student founders & tech leaders:</p>
             <div class="team-grid">
                 <div class="team-member">
                     <img src="icons/ezra.jpg" alt="Ezra Wanyama">
@@ -335,73 +176,226 @@
                     <p>Co-Creator / Coordinator</p>
                 </div>
             </div>
+            
+            <button id="installBtn" class="btn-install" onclick="triggerInstall()">
+                <span>📱</span> Install App to Phone Screen
+            </button>
+        </div>
+    </div>
+    <div id="customModal" class="custom-modal-overlay">
+        <div class="custom-modal">
+            <h3>Add New Course</h3>
+            <p>Enter Course Name (e.g., CS 1102 - Datastructures):</p>
+            <input type="text" id="modalCourseInput" placeholder="Course Name & Code">
+            <div class="custom-modal-btns">
+                <button class="custom-modal-btn btn-cancel" onclick="closeAddCourseModal()">Cancel</button>
+                <button class="custom-modal-btn btn-confirm" onclick="confirmAddCourse()">Add Course</button>
+            </div>
         </div>
     </div>
 
-    <!-- Quick Navigation Drawer - Mzuri wa Asilimia 100 -->
+    <div id="customReminderModal" class="custom-modal-overlay">
+        <div class="custom-modal">
+            <h3>Manage Reminders ⏰</h3>
+            <p>Set or edit your custom study deadlines:</p>
+            <input type="hidden" id="editReminderIndex" value="-1">
+            <input type="text" id="reminderSubject" placeholder="Subject / Topic (e.g., Programming Exam)">
+            <input type="date" id="reminderDate">
+            <input type="time" id="reminderTime">
+            
+            <div class="custom-modal-btns" style="margin-bottom: 16px;">
+                <button class="custom-modal-btn btn-confirm" onclick="saveCustomReminder()">Save Reminder</button>
+                <button class="custom-modal-btn btn-cancel" onclick="clearReminderForm()">Clear</button>
+            </div>
+
+            <h4 style="margin: 10px 0 6px 0; font-size: 13px; color: var(--accent-blue);">Active Custom Reminders:</h4>
+            <div id="reminderListContainer" style="max-height: 120px; overflow-y: auto;"></div>
+
+            <div class="custom-modal-btns" style="margin-top: 16px; border-top: 1px solid var(--border-color); padding-top: 12px;">
+                <button class="custom-modal-btn btn-cancel" onclick="closeReminderModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="customAlertModal" class="custom-modal-overlay">
+        <div class="custom-modal">
+            <h3 id="customAlertTitle">UoPeople Notification</h3>
+            <p id="customAlertDesc">Message goes here...</p>
+            <div class="custom-modal-btns">
+                <button class="custom-modal-btn btn-confirm" onclick="closeCustomAlert()">Got it</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="wakeModal">
+        <div class="spinner"></div>
+        <h2 id="wakeTitle" style="margin: 0 0 8px 0; color: #f8fafc; font-size: 18px;">Waking up Ezrelyn from her nap... 😴</h2>
+        <p id="wakeDesc" style="margin: 0 0 16px 0; color: #94a3b8; font-size: 13px;">Render servers are stretching! Please wait...</p>
+        <div id="countdownTimer" style="font-size: 24px; font-weight: bold; color: #34d399;">0s</div>
+    </div>
+
     <div id="navDrawer" class="drawer">
         <div>
             <div class="drawer-header">
                 <h3 style="margin: 0; color: var(--accent-gold);">Quick Navigation</h3>
                 <button class="close-btn" onclick="toggleDrawer()">✕</button>
             </div>
-            <a href="https://portal.uopeople.edu/login" target="_blank" class="btn-secondary" style="margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
-                <span>Student Portal</span> <span>↗</span>
-            </a>
-            <a href="https://learn.uopeople.edu/d2l/home" target="_blank" class="btn-secondary" style="margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
-                <span>Brightspace LMS</span> <span>↗</span>
-            </a>
-            <a href="#" onclick="alert('Ezrelyn Proctor AI Assistant'); return false;" class="btn-secondary" style="display: flex; align-items: center; justify-content: space-between;">
-                <span>Ezrelyn Proctor AI</span> <span>↗</span>
-            </a>
+            <div class="drawer-links">
+                <a href="https://portal.uopeople.edu/login" target="_blank" class="btn-secondary" style="display: flex; align-items: center; justify-content: space-between;">
+                    <span>Student Portal</span> <span>↗</span>
+                </a>
+                <a href="https://learn.uopeople.edu/d2l/home" target="_blank" class="btn-secondary" style="display: flex; align-items: center; justify-content: space-between;">
+                    <span>Brightspace LMS</span> <span>↗</span>
+                </a>
+                <a href="#" onclick="launchEzrelynWithMagic(); return false;" class="btn-secondary" style="display: flex; align-items: center; justify-content: space-between;">
+                    <span>Ezrelyn Proctor AI</span> <span>↗</span>
+                </a>
+            </div>
+
+            <div class="drawer-footer-section">
+                <p style="margin: 0 0 8px 0; font-size: 11px; color: var(--text-muted); font-weight: bold; letter-spacing: 0.5px;">NOTIFICATIONS CONTROL</p>
+                <button id="notifToggleBtn" class="btn-notif" onclick="toggleStudyNotifications()">🔔 Enable Study Reminders</button>
+                <button class="btn-custom-notif" onclick="openReminderModal()">➕ Manage Reminders</button>
+            </div>
         </div>
         <div>
-            <button id="installBtn" class="btn-install">Install App to Screen</button>
+            <p style="text-align: center; font-size: 10px; color: var(--text-muted); margin: 10px 0 0 0;">Powered by UoPeople & NTI</p>
         </div>
     </div>
-
     <script>
-        // Drawer toggle
-        function toggleDrawer() {
-            document.getElementById('navDrawer').classList.toggle('open');
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker registered!', reg))
+                    .catch(err => console.log('SW failed:', err));
+            });
         }
 
-        // GPA Tracker dropdown toggle
-        function toggleGpaList() {
-            document.getElementById('gpaContent').classList.toggle('open');
+        function toggleDrawer() { document.getElementById('navDrawer').classList.toggle('open'); }
+        function toggleGpaList() { document.getElementById('gpaContent').classList.toggle('open'); }
+
+        function openAddCourseModal() {
+            document.getElementById('modalCourseInput').value = '';
+            document.getElementById('customModal').style.display = 'flex';
+            document.getElementById('modalCourseInput').focus();
+        }
+        function closeAddCourseModal() { document.getElementById('customModal').style.display = 'none'; }
+        
+        function confirmAddCourse() {
+            let name = document.getElementById('modalCourseInput').value.trim();
+            if (name) {
+                courses.push({ name: name, grade: 4.0 });
+                renderCourses();
+                closeAddCourseModal();
+            } else {
+                showCustomAlert("Input Error", "Please enter a valid course name.");
+            }
         }
 
-        // Default Courses & Grade System
+        function openReminderModal() {
+            clearReminderForm();
+            renderReminderList();
+            document.getElementById('customReminderModal').style.display = 'flex';
+        }
+        function closeReminderModal() { document.getElementById('customReminderModal').style.display = 'none'; }
+
+        function clearReminderForm() {
+            document.getElementById('editReminderIndex').value = "-1";
+            document.getElementById('reminderSubject').value = '';
+            document.getElementById('reminderDate').value = '';
+            document.getElementById('reminderTime').value = '';
+        }
+
+        function saveCustomReminder() {
+            let index = parseInt(document.getElementById('editReminderIndex').value);
+            let subject = document.getElementById('reminderSubject').value.trim();
+            let date = document.getElementById('reminderDate').value;
+            let time = document.getElementById('reminderTime').value;
+
+            if (subject && date && time) {
+                let reminders = JSON.parse(localStorage.getItem('uopeople_custom_reminders')) || [];
+                if (index > -1) {
+                    reminders[index] = { subject, date, time };
+                } else {
+                    reminders.push({ subject, date, time });
+                }
+                localStorage.setItem('uopeople_custom_reminders', JSON.stringify(reminders));
+                renderReminderList();
+                clearReminderForm();
+                showCustomAlert("Success! ⏰", "Reminder saved successfully.");
+            } else {
+                showCustomAlert("Missing Fields", "Please fill in subject, date, and time.");
+            }
+        }
+
+        function renderReminderList() {
+            let container = document.getElementById('reminderListContainer');
+            container.innerHTML = '';
+            let reminders = JSON.parse(localStorage.getItem('uopeople_custom_reminders')) || [];
+            
+            if (reminders.length === 0) {
+                container.innerHTML = '<div style="color: var(--text-muted); text-align: center; font-size: 11px;">No custom reminders set yet.</div>';
+                return;
+            }
+
+            reminders.forEach((rem, idx) => {
+                container.innerHTML += `
+                    <div class="reminder-list-item">
+                        <div>
+                            <strong>${rem.subject}</strong><br>
+                            <span style="color: var(--text-muted);">${rem.date} at ${rem.time}</span>
+                        </div>
+                        <div style="display: flex; gap: 4px;">
+                            <button onclick="editReminder(${idx})" style="background:#065f46; color:#34d399; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">Edit</button>
+                            <button onclick="deleteReminder(${idx})" style="background:#7f1d1d; color:#f87171; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">Del</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function editReminder(index) {
+            let reminders = JSON.parse(localStorage.getItem('uopeople_custom_reminders')) || [];
+            let rem = reminders[index];
+            if (rem) {
+                document.getElementById('editReminderIndex').value = index;
+                document.getElementById('reminderSubject').value = rem.subject;
+                document.getElementById('reminderDate').value = rem.date;
+                document.getElementById('reminderTime').value = rem.time;
+            }
+        }
+
+        function deleteReminder(index) {
+            let reminders = JSON.parse(localStorage.getItem('uopeople_custom_reminders')) || [];
+            reminders.splice(index, 1);
+            localStorage.setItem('uopeople_custom_reminders', JSON.stringify(reminders));
+            renderReminderList();
+        }
+
+        function showCustomAlert(title, desc) {
+            document.getElementById('customAlertTitle').innerText = title;
+            document.getElementById('customAlertDesc').innerText = desc;
+            document.getElementById('customAlertModal').style.display = 'flex';
+        }
+        function closeCustomAlert() { document.getElementById('customAlertModal').style.display = 'none'; }
+
         let courses = JSON.parse(localStorage.getItem('uopeople_courses')) || [
-            { name: "CS 1101 - Programming Fundamentals", grade: 4.0, label: "A (4.0)" },
-            { name: "ENG 10112 - English Composition", grade: 3.7, label: "A- (3.7)" },
-            { name: "UNIV 1001 - Online Education", grade: 4.0, label: "A (4.0)" }
+            { name: "CS 1101 - Programming Fundamentals", grade: 4.0 },
+            { name: "ENG 10112 - English Composition", grade: 3.7 },
+            { name: "UNIV 1001 - Online Education", grade: 4.0 }
         ];
-
-        const gradeMap = {
-            "A (4.0)": 4.0, "A- (3.7)": 3.7, "B+ (3.3)": 3.3,
-            "B (3.0)": 3.0, "B- (2.7)": 2.7, "C+ (2.3)": 2.3,
-            "C (2.0)": 2.0, "D (1.0)": 1.0, "F (0.0)": 0.0
-        };
 
         function renderCourses() {
             const container = document.getElementById('courseListContainer');
             container.innerHTML = '';
             let totalGrade = 0;
             courses.forEach((c, index) => {
-                totalGrade += c.grade;
+                totalGrade += Number(c.grade) || 0;
                 let html = `
                     <div class="course-item">
                         <span style="max-width: 170px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${c.name}</span>
                         <div style="display: flex; align-items: center; gap: 6px;">
-                            <select onchange="updateGrade(${index}, this.value)">
-                `;
-                for (let key in gradeMap) {
-                    let selected = (gradeMap[key] === c.grade) ? 'selected' : '';
-                    html += `<option value="${key}" ${selected}>${key}</option>`;
-                }
-                html += `
-                            </select>
+                            <input type="number" step="0.1" min="0.0" max="4.0" class="grade-input" value="${c.grade}" onchange="updateGradeInput(${index}, this.value)">
                             <button class="delete-btn" onclick="deleteCourse(${index})">🗑️</button>
                         </div>
                     </div>
@@ -414,9 +408,12 @@
             localStorage.setItem('uopeople_courses', JSON.stringify(courses));
         }
 
-        function updateGrade(index, val) {
-            courses[index].grade = gradeMap[val];
-            courses[index].label = val;
+        function updateGradeInput(index, val) {
+            let num = parseFloat(val);
+            if (isNaN(num)) num = 0.0;
+            if (num > 4.0) num = 4.0;
+            if (num < 0.0) num = 0.0;
+            courses[index].grade = num;
             renderCourses();
         }
 
@@ -424,87 +421,165 @@
             courses.splice(index, 1);
             renderCourses();
         }
-
-        function addCourse() {
-            let name = prompt("Enter Course Name (e.g., CS 1102 - Datastructures):");
-            if (name) {
-                courses.push({ name: name, grade: 4.0, label: "A (4.0)" });
-                renderCourses();
-            }
-        }
-
-        renderCourses();
-
-        // Background Check for Sun, Mon, Wed Deadlines (Silent Notification Trigger)
-        function checkDeadlineReminders() {
-            if (!("Notification" in window)) return;
+    </script>
+    <script>
+        function updateNotificationButtonState() {
+            const btn = document.getElementById('notifToggleBtn');
+            const isEnabled = localStorage.getItem('uopeople_notifs_enabled') === 'true';
             
-            if (Notification.permission === "default") {
-                Notification.requestPermission();
-            }
-
-            const today = new Date().getDay(); // 0: Sun, 1: Mon, 3: Wed
-            let title = "", body = "";
-
-            if (today === 0) {
-                title = "📌 Discussion Forums Due Today";
-                body = "UoPeople Sunday Reminder: Post your initial responses and reply to peers.";
-            } else if (today === 1) {
-                title = "📝 Graded Quizzes Due Today";
-                body = "UoPeople Monday Reminder: Complete and submit your quizzes on time.";
-            } else if (today === 3) {
-                title = "📚 Unit / Written Assignments Due";
-                body = "UoPeople Wednesday Reminder: Learning journals and written assignments deadline.";
-            }
-
-            if (title && Notification.permission === "granted") {
-                if (navigator.serviceWorker && navigator.serviceWorker.controller) {
-                    navigator.serviceWorker.ready.then(reg => {
-                        reg.showNotification(title, {
-                            body: body,
-                            icon: "icons/icon-192.png",
-                            badge: "icons/icon-192.png"
-                        });
-                    });
-                }
+            if (("Notification" in window) && Notification.permission === "granted" && isEnabled) {
+                btn.innerText = "🔕 Disable Study Reminders";
+                btn.className = "btn-notif disabled";
+            } else {
+                btn.innerText = "🔔 Enable Study Reminders";
+                btn.className = "btn-notif";
             }
         }
 
-        window.addEventListener('load', () => {
-            setTimeout(checkDeadlineReminders, 4000);
-        });
+        function triggerNativeNotification(title, bodyText) {
+            if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+                navigator.serviceWorker.ready.then(reg => {
+                    reg.showNotification(title, {
+                        body: bodyText,
+                        icon: "icons/icon-192.png",
+                        badge: "icons/icon-192.png",
+                        vibrate: [200, 100, 200, 100, 200],
+                        requireInteraction: true
+                    });
+                }).catch(() => {
+                    new Notification(title, { body: bodyText, icon: "icons/icon-192.png" });
+                });
+            } else if ("Notification" in window && Notification.permission === "granted") {
+                new Notification(title, { body: bodyText, icon: "icons/icon-192.png" });
+            }
+        }
 
-        // Service Worker Registration
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('Service Worker registered successfully!', reg))
-                    .catch(err => console.log('SW registration failed:', err));
+        function toggleStudyNotifications() {
+            if (!("Notification" in window)) {
+                showCustomAlert("Not Supported", "Notifications are not supported on this browser.");
+                return;
+            }
+
+            const isEnabled = localStorage.getItem('uopeople_notifs_enabled') === 'true';
+
+            if (isEnabled) {
+                localStorage.setItem('uopeople_notifs_enabled', 'false');
+                updateNotificationButtonState();
+                showCustomAlert("Reminders Disabled 🔕", "You will no longer receive study reminders.");
+            } else {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        localStorage.setItem('uopeople_notifs_enabled', 'true');
+                        updateNotificationButtonState();
+                        
+                        triggerNativeNotification("UoPeople Student Hub 🔔", "Study reminders are now enabled! You will receive daily updates.");
+                        showCustomAlert("Reminders Enabled 🔔", "You'll be receiving notifications from now on!");
+                    } else {
+                        showCustomAlert("Permission Denied", "Please allow notifications in your browser settings.");
+                    }
+                });
+            }
+        }
+
+        async function launchEzrelynWithMagic() {
+            const ezrelynUrl = "https://ezrelyn-ai-proctor-system.onrender.com/";
+            const modal = document.getElementById('wakeModal');
+            const timerEl = document.getElementById('countdownTimer');
+            const titleEl = document.getElementById('wakeTitle');
+            const descEl = document.getElementById('wakeDesc');
+
+            modal.style.display = 'flex';
+            let seconds = 0;
+            
+            const funnyQuotes = [
+                "Making coffee for Ezrelyn...",
+                "Bribing Render servers with bandwidth...",
+                "Dusting off exam papers...",
+                "Almost there! Ezrelyn is waking up...",
+                "Waking up AI brain cells..."
+            ];
+
+            let timerInterval = setInterval(() => {
+                seconds++;
+                timerEl.innerText = seconds + "s";
+                if (seconds % 4 === 0) {
+                    let quoteIndex = (seconds / 4) % funnyQuotes.length;
+                    descEl.innerText = funnyQuotes[quoteIndex];
+                }
+            }, 1000);
+
+            try {
+                await fetch(ezrelynUrl, { mode: 'no-cors' });
+            } catch (e) {
+                console.log("Wake up ping sent");
+            }
+
+            setTimeout(() => {
+                clearInterval(timerInterval);
+                titleEl.innerText = "Ezrelyn is awake! 🚀";
+                descEl.innerText = "Launching app now...";
+                setTimeout(() => {
+                    window.location.href = ezrelynUrl;
+                }, 800);
+            }, 4000);
+        }
+
+        function checkTimedNotifications() {
+            const isEnabled = localStorage.getItem('uopeople_notifs_enabled') === 'true';
+            if (!("Notification" in window) || Notification.permission !== "granted" || !isEnabled) return;
+
+            let now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+
+            let todayDateStr = now.toISOString().split('T')[0];
+            let lastSentSession = localStorage.getItem('uopeople_last_scheduled_session') || '';
+
+            let currentSession = "";
+            if (hours === 10 && minutes === 0) currentSession = "morning_" + todayDateStr;
+            if (hours === 18 && minutes === 0) currentSession = "evening_" + todayDateStr;
+
+            if (currentSession && lastSentSession !== currentSession) {
+                if (hours === 10) {
+                    triggerNativeNotification("☀️ Morning Study Reminder (10 AM)", "Good morning! Time to check your UoPeople courses and complete today's assignments.");
+                } else if (hours === 18) {
+                    triggerNativeNotification("🌙 Evening Study Reminder (6 PM)", "Good evening! Review your reading materials and stay ahead of your deadlines.");
+                }
+                localStorage.setItem('uopeople_last_scheduled_session', currentSession);
+            }
+
+            let customReminders = JSON.parse(localStorage.getItem('uopeople_custom_reminders')) || [];
+            let currentDate = now.toISOString().split('T')[0];
+            let currentTime = now.toTimeString().slice(0, 5);
+
+            customReminders.forEach(rem => {
+                if (rem.date === currentDate && rem.time === currentTime) {
+                    triggerNativeNotification(`⏰ Deadline Reminder: ${rem.subject}`, `Your scheduled study deadline for ${rem.subject} is due now!`);
+                }
             });
         }
 
-        // PWA Install Prompt Handler
-        let deferredPrompt;
-        const installBtn = document.getElementById('installBtn');
+        window.addEventListener('load', () => {
+            renderCourses();
+            updateNotificationButtonState();
 
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installBtn.style.display = 'block';
-        });
-
-        installBtn.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    console.log('User accepted install prompt');
+            const isEnabled = localStorage.getItem('uopeople_notifs_enabled') === 'true';
+            if (("Notification" in window) && Notification.permission === "granted" && isEnabled) {
+                let sessionNotified = sessionStorage.getItem('uopeople_session_welcomed');
+                if (!sessionNotified) {
+                    sessionStorage.setItem('uopeople_session_welcomed', 'true');
+                    setTimeout(() => {
+                        triggerNativeNotification("UoPeople Hub 🚀", "Welcome back! You have active study access and notifications running.");
+                    }, 2000);
                 }
-                deferredPrompt = null;
-                installBtn.style.display = 'none';
-                toggleDrawer();
             }
+
+            setInterval(checkTimedNotifications, 30000);
         });
+
+        function triggerInstall() {
+            showCustomAlert("Install Instructions 📱", "To install this app on your phone screen, tap your browser's menu (three dots at the top right) and select 'Add to Home screen' or 'Install app'.");
+        }
     </script>
 </body>
 </html>
