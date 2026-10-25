@@ -1,17 +1,17 @@
-const CACHE_NAME = 'uopeople-hub-v2';
+const CACHE_NAME = 'uopeople-hub-v3';
 const ASSETS_TO_CACHE = [
-    '/',
-    '/index.html',
-    '/manifest.json',
-    '/icons/icon-192.png',
-    '/icons/logo.jpeg',
-    '/icons/sarah.jpg',
-    '/icons/ezra.jpg',
-    '/icons/brian.jpg',
-    '/icons/nti_logo.jpg'
+    './',
+    './index.html',
+    './manifest.json',
+    './icons/icon-192.png',
+    './icons/logo.jpeg',
+    './icons/sarah.jpg',
+    './icons/ezra.jpg',
+    './icons/brian.jpg',
+    './icons/nti_logo.jpg'
 ];
 
-// Install Event: Cache all critical assets
+// Install: Cache all files immediately
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
@@ -21,7 +21,7 @@ self.addEventListener('install', (event) => {
     self.skipWaiting();
 });
 
-// Activate Event: Clean up old caches
+// Activate: Clear old caches
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys().then((keys) => {
@@ -37,26 +37,30 @@ self.addEventListener('activate', (event) => {
     self.claim();
 });
 
-// Fetch Event: Stale-While-Revalidate / Cache-First
+// Fetch: Serve from cache first, fallback to network, never show offline error
 self.addEventListener('fetch', (event) => {
-    // Only handle GET requests
     if (event.request.method !== 'GET') return;
 
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
-            const fetchPromise = fetch(event.request).then((networkResponse) => {
-                if (networkResponse && networkResponse.status === 200) {
-                    caches.open(CACHE_NAME).then((cache) => {
-                        cache.put(event.request, networkResponse.clone());
-                    });
-                }
+            if (cachedResponse) {
+                // Return cached version immediately, update cache in background if online
+                fetch(event.request).then((networkResponse) => {
+                    if (networkResponse && networkResponse.status === 200) {
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(event.request, networkResponse.clone());
+                        });
+                    }
+                }).catch(() => {});
+                return cachedResponse;
+            }
+
+            // If not in cache, try network, otherwise fallback to index.html for SPA/PWA routing
+            return fetch(event.request).then((networkResponse) => {
                 return networkResponse;
             }).catch(() => {
-                // If offline and not in cache, fallback safely
-                return cachedResponse;
+                return caches.match('./index.html');
             });
-
-            return cachedResponse || fetchPromise;
         })
     );
 });
